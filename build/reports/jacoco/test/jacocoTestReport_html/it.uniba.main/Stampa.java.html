@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Stampa.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">dama</a> &gt; <a href="index.source.html" class="el_package">it.uniba.main</a> &gt; <span class="el_source">Stampa.java</span></div><h1>Stampa.java</h1><pre class="source lang-java linenums">/**
+ * &lt;&lt;Boundary&gt;&gt;
+ * 
+ * Classe che gestisce la componente visiva del programma 
+ * e quindi i messaggi di output.
+ */
+
+package it.uniba.main;
+
+<span class="nc" id="L10">public class Stampa {</span>
+/** Metodo che visualizza un messaggio che suggerisce l'inizio di una partita, per poter accedere alla funzione richiesta*/
+	public void iniziaPartita() {
+<span class="nc" id="L13">        System.out.print(&quot;Per visualizzarlo devi prima iniziare una partita, digitando il comando 'gioca'\n&quot;);</span>
+
+<span class="nc" id="L15">	}</span>
+/** Metodo che visualizza una damiera e la disposizione delle caselle numerate*/	
+	public void stampaNumeri() {
+<span class="nc" id="L18">		System.out.print(&quot;-------------------------------------\n&quot;);</span>
+<span class="nc" id="L19">        System.out.print(&quot;|  1 |\u2588\u2588\u2588|  2 |\u2588\u2588\u2588|  3 |\u2588\u2588\u2588|  4 |\u2588\u2588\u2588|\n&quot;);</span>
+<span class="nc" id="L20">        System.out.print(&quot;-------------------------------------\n&quot;);</span>
+<span class="nc" id="L21">        System.out.print(&quot;|\u2588\u2588\u2588|  5 |\u2588\u2588\u2588|  6 |\u2588\u2588\u2588|  7 |\u2588\u2588\u2588|  8 |\n&quot;);</span>
+<span class="nc" id="L22">        System.out.print(&quot;-------------------------------------\n&quot;);</span>
+<span class="nc" id="L23">        System.out.print(&quot;|  9 |\u2588\u2588\u2588| 10 |\u2588\u2588\u2588| 11 |\u2588\u2588\u2588| 12 |\u2588\u2588\u2588|\n&quot;);</span>
+<span class="nc" id="L24">        System.out.print(&quot;-------------------------------------\n&quot;);</span>
+<span class="nc" id="L25">        System.out.print(&quot;|\u2588\u2588\u2588| 13 |\u2588\u2588\u2588| 14 |\u2588\u2588\u2588| 15 |\u2588\u2588\u2588| 16 |\n&quot;);</span>
+<span class="nc" id="L26">        System.out.print(&quot;-------------------------------------\n&quot;);</span>
+<span class="nc" id="L27">        System.out.print(&quot;| 17 |\u2588\u2588\u2588| 18 |\u2588\u2588\u2588| 19 |\u2588\u2588\u2588| 20 |\u2588\u2588\u2588|\n&quot;);</span>
+<span class="nc" id="L28">        System.out.print(&quot;-------------------------------------\n&quot;);</span>
+<span class="nc" id="L29">        System.out.print(&quot;|\u2588\u2588\u2588| 21 |\u2588\u2588\u2588| 22 |\u2588\u2588\u2588| 23 |\u2588\u2588\u2588| 24 |\n&quot;);</span>
+<span class="nc" id="L30">        System.out.print(&quot;-------------------------------------\n&quot;);</span>
+<span class="nc" id="L31">        System.out.print(&quot;| 25 |\u2588\u2588\u2588| 26 |\u2588\u2588\u2588| 27 |\u2588\u2588\u2588| 28 |\u2588\u2588\u2588|\n&quot;);</span>
+<span class="nc" id="L32">        System.out.print(&quot;-------------------------------------\n&quot;);</span>
+<span class="nc" id="L33">        System.out.print(&quot;|\u2588\u2588\u2588| 29 |\u2588\u2588\u2588| 30 |\u2588\u2588\u2588| 31 |\u2588\u2588\u2588| 32 |\n&quot;);</span>
+<span class="nc" id="L34">        System.out.print(&quot;-------------------------------------\n&quot;);</span>
+        
+<span class="nc" id="L36">	}</span>
+/** Metodo che viusualizza la spiegazione e il funzionamento dei vari comandi digitabili*/	
+	public void stampaAiuto() {
+<span class="nc" id="L39">         System.out.print(&quot;Per sapere come si gioca e le varie regole visitare il sito: http://www.fid.it/corsi/italiana/regole.htm        n&quot;);</span>
+<span class="nc" id="L40">         System.out.print(&quot; Digitare il comando 'gioca' per avviare una nuova partita                                                      \n&quot;);</span>
+<span class="nc" id="L41">         System.out.print(&quot; Digitare il comando 'esci' per uscire dal gioco (é necessario abbandonare la partita se ne é stata inizata una)\n&quot;);</span>
+<span class="nc" id="L42">         System.out.print(&quot; Digitare il comando 'abbandona' per abbandonare la parita e arrendersi                                                                \n&quot;);</span>
+<span class="nc" id="L43">         System.out.print(&quot; Digitare il comando 'numeri' per visualizzare una damiera con le varie caselle numerate                                               \n&quot;);</span>
+<span class="nc" id="L44">         System.out.print(&quot; Digitare il comando 'tempo' per visualizzare il tempo trascorso (in minuti) dall'inizio della partita (Disponibile solo a partita iniziata)\n&quot;);</span>
+<span class="nc" id="L45">         System.out.print(&quot; Digitare il comando 'damiera' per visualizzare una damiera con la posizione delle pedine (Disponibile solo a partita iniziata)             \n&quot;);</span>
+<span class="nc" id="L46">         System.out.print(&quot; Digitare il comando 'mossa' per visualizzare le mosse effettuate da entrambi i giocatori (Disponibile solo a partita iniziata)             \n&quot;); //issue#33</span>
+<span class="nc" id="L47">         System.out.print(&quot; Digitare il comando 'prese' per visualizzare le pedine prese da entrambi i giocatori (Disponibile solo a partita iniziata)             \n&quot;); //issue#31</span>
+
+
+<span class="nc" id="L50">         System.out.print(&quot; \n Le mosse devono avere il seguente formato per uno spostare una pedina --&gt; '&lt;CASELLA DI PARTENZA&gt;-&lt;CASELLA DI DESTINAZIONE&gt; ES.18-13  (E' necessario aver iniziato la partita con il comando 'gioca'\n&quot;);</span>
+         
+<span class="nc" id="L52">         System.out.print(&quot; \n Le mosse devono avere il seguente formato per una presa semplice      --&gt; '&lt;CASELLA DI PARTENZA&gt;x&lt;CASELLA DI DESTINAZIONE&gt; ES.18x9  (E' necessario aver iniziato la partita con il comando 'gioca'\n&quot;); //issue#25</span>
+
+<span class="nc" id="L54">	}</span>
+/** Metodo che permette la visualizzazione della damiera completa delle pedine/dame nella loro posizione attuale */	
+	public void stampaDamiera(Dama dama_bianca[],Dama dama_nera[]) {
+<span class="nc" id="L57">		 int riga = 0;</span>
+         int riquadro;
+<span class="nc" id="L59">         int cella = 0;</span>
+<span class="nc" id="L60">         boolean trovato=false;</span>
+<span class="nc bnc" id="L61" title="All 2 branches missed.">         for (int i = 0; i &lt; 33; i++) {</span>
+<span class="nc" id="L62">             System.out.print(&quot;-&quot;);</span>
+         }
+<span class="nc" id="L64">         System.out.print(&quot;\n&quot;);</span>
+<span class="nc bnc" id="L65" title="All 2 branches missed.">         while (riga &lt;= 7) {        //conteggio righe stampate</span>
+<span class="nc bnc" id="L66" title="All 2 branches missed.">             if ((riga % 2) == 0) { //controllo se trattasi di un riga pari o dispari per </span>
+<span class="nc" id="L67">                 riquadro = 0;      </span>
+             } else {
+<span class="nc" id="L69">                 riquadro = 1;</span>
+             }
+
+<span class="nc bnc" id="L72" title="All 2 branches missed.">             for (int i = 0; i &lt; 33; i++) { // un ciclo per ogni carattere che compone la riga </span>
+<span class="nc bnc" id="L73" title="All 2 branches missed.">                 if (i % 4 == 0) {      //un riquadro ï¿½ composto da 4 caratteri e alla fine si divide con &quot;|&quot;</span>
+<span class="nc" id="L74">                     System.out.print(&quot;|&quot;);</span>
+<span class="nc" id="L75">                     riquadro++;            //se un riquadro é dispari é bianco altrimenti é nero </span>
+                 } else {                        //se non é terminato il riquadro controlla il carattere da inserire
+<span class="nc bnc" id="L77" title="All 2 branches missed.">                     if ((riquadro % 2) == 0) {</span>
+
+<span class="nc" id="L79">                         System.out.print(&quot;\u2588&quot;); //stampa riquadro bianco</span>
+
+
+                     } else { //altrimenti se il riquadro é nero...
+<span class="nc" id="L83">                         trovato=false;</span>
+<span class="nc bnc" id="L84" title="All 2 branches missed.">                     	for (int k = 0; k &lt; 12; k++) {  //controlla se tra le dame c'é una che si trova in quel riquadro(casella)</span>
+                         
+<span class="nc bnc" id="L86" title="All 2 branches missed.">                     		if (dama_bianca[k].rileva_cella() == cella) { //controllo corrispondenza cella</span>
+<span class="nc" id="L87">                             	System.out.print(&quot; &quot;+dama_bianca[k].stampa_pedina()+&quot; &quot;); //stampa immagine della pedina</span>
+<span class="nc" id="L88">                                 trovato = true;</span>
+<span class="nc" id="L89">                                 k=13; //finalizza l'indice del ciclo</span>
+<span class="nc" id="L90">                                 i=i+2; //avanza il contatore dei simboli per quel riquadro</span>
+
+<span class="nc" id="L92">                                 cella++; //cella terminata</span>
+                             }
+                         }
+<span class="nc bnc" id="L95" title="All 2 branches missed.">                             if(trovato==false){</span>
+<span class="nc bnc" id="L96" title="All 2 branches missed.">                             	for (int k = 0; k &lt; 12; k++) {  //controlla se tra le dame c'ï¿½ una che si trova in quel riquadro(casella)</span>
+                               
+<span class="nc bnc" id="L98" title="All 2 branches missed.">                                     if (dama_nera[k].rileva_cella() == cella) { //controllo corrispondenza cella</span>
+<span class="nc" id="L99">                                     	System.out.print(&quot; &quot;+dama_nera[k].stampa_pedina()+&quot; &quot;); //stampa immagine della pedina</span>
+<span class="nc" id="L100">                                         trovato = true;</span>
+<span class="nc" id="L101">                                         k=13;    </span>
+<span class="nc" id="L102">                                         i=i+2;  //cella terminata</span>
+
+<span class="nc" id="L104">                                         cella++; //cella terminata</span>
+                                     }
+                                 }
+                             }
+<span class="nc bnc" id="L108" title="All 2 branches missed.">                             if (trovato==false) { </span>
+<span class="nc" id="L109">                             	System.out.print(&quot;   &quot;); //viene visualizzata la cella vuota</span>
+<span class="nc" id="L110">                                 i=i+2; //cella terminata</span>
+<span class="nc" id="L111">                                 cella++; </span>
+                             }
+                         }
+                     }
+                 }
+<span class="nc" id="L116">  System.out.print(&quot;\n&quot;);</span>
+
+<span class="nc bnc" id="L118" title="All 2 branches missed.">             for (int i = 0; i &lt; 32; i++) {</span>
+<span class="nc" id="L119">                 System.out.print(&quot;-&quot;);</span>
+             }
+<span class="nc" id="L121">             System.out.print(&quot;\n&quot;);</span>
+
+<span class="nc" id="L123">             riga++; //riga successiva</span>
+             }
+
+     
+<span class="nc" id="L127">	}</span>
+	
+	
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

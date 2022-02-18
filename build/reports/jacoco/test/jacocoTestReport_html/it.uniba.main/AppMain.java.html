@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AppMain.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">dama</a> &gt; <a href="index.source.html" class="el_package">it.uniba.main</a> &gt; <span class="el_source">AppMain.java</span></div><h1>AppMain.java</h1><pre class="source lang-java linenums">/**
+ * &lt;&lt;Boundary&gt;&gt;
+ * 
+ * Classe principale, a diretto contatto con l'utente, 
+ * indirizzando i vari input verso la classe responsabile
+ */
+
+
+package it.uniba.main;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.security.GeneralSecurityException;
+
+//import it.uniba.sotorrent.GoogleDocsUtils;
+
+import java.util.*;
+/**
+ * The main class for the project. It must be customized to meet the project
+ * assignment specifications.
+ * 
+ * &lt;b&gt;DO NOT RENAME&lt;/b&gt;
+ */
+@SuppressWarnings(&quot;unused&quot;)
+public final class AppMain {
+    private static Scanner input;
+
+
+	/**
+	 * Private constructor. Change if needed.
+	 */
+	private AppMain() {
+
+	}
+
+	/**
+	 * 	 * This is the main entry of the application.
+	 *
+	 * @param args The command-line arguments.
+	 */
+	public static void main(final String[] args){
+<span class="nc" id="L43">System.out.println(&quot;Current working dir: &quot; + System.getProperty(&quot;user.dir&quot;));</span>
+
+<span class="nc" id="L45">String comando = new String();</span>
+<span class="nc" id="L46">Stampa visualizza = new Stampa();</span>
+<span class="nc" id="L47">input = new Scanner(System.in);     //test di lettura da tastiera</span>
+
+<span class="nc bnc" id="L49" title="All 2 branches missed.">if (args.length &gt; 0) {</span>
+<span class="nc bnc" id="L50" title="All 5 branches missed.">			switch (args[0]) {</span>
+			case &quot;it&quot;:
+<span class="nc" id="L52">				     System.out.println(&quot;Applicazione avviata.&quot;);</span>
+<span class="nc" id="L53">				break;</span>
+
+			case &quot;en&quot;:
+<span class="nc" id="L56">				     System.out.println(&quot;Application started.&quot;);</span>
+<span class="nc" id="L57">				break;</span>
+				
+            case &quot;--help&quot;:
+<span class="nc" id="L60">                     visualizza.stampaAiuto();</span>
+<span class="nc" id="L61">                break;</span>
+                            
+            case &quot;-h&quot;:
+<span class="nc" id="L64">                     visualizza.stampaAiuto();</span>
+<span class="nc" id="L65">                break;</span>
+
+			}
+		} else {
+<span class="nc" id="L69">			System.out.println(&quot;Uso lingua di default 'it'&quot;);</span>
+<span class="nc" id="L70">			System.out.println(&quot;Applicazione avviata.&quot;);</span>
+		}
+<span class="nc" id="L72"> System.out.print(&quot;            ***Benvenuti in Dama Italiana*** \n&quot;);</span>
+
+<span class="nc bnc" id="L74" title="All 2 branches missed.">  while((comando.contentEquals(&quot;esci&quot;))==false)      { </span>
+	  
+<span class="nc" id="L76">	        System.out.print(&quot;Inserire un comando o digitare help per conoscere i comandi disponibili\n&quot;);</span>
+	        
+<span class="nc" id="L78">	        comando = input.nextLine();</span>
+                
+<span class="nc bnc" id="L80" title="All 9 branches missed.">     switch (comando) {</span>
+  
+              case &quot;esci&quot;:
+<span class="nc" id="L83">	                     System.out.println(&quot;Sei sicuro di voler uscire? Digitare si per uscire o altro per continuare&quot;);</span>
+<span class="nc" id="L84">	                     comando = input.nextLine();</span>
+
+	                    
+<span class="nc bnc" id="L87" title="All 2 branches missed.">	                     if(comando.contains(&quot;si&quot;)) {</span>
+<span class="nc" id="L88">	                     System.exit(0);</span>
+                         }
+                     break;
+                     
+              case&quot;damiera&quot;:
+<span class="nc" id="L93">                          visualizza.iniziaPartita();</span>
+<span class="nc" id="L94">                     break;</span>
+  
+              case&quot;numeri&quot;:
+<span class="nc" id="L97">                          visualizza.stampaNumeri();</span>
+<span class="nc" id="L98">                  	 break;</span>
+                        	  
+			  case &quot;help&quot;:
+<span class="nc" id="L101">                          visualizza.stampaAiuto();</span>
+<span class="nc" id="L102">                     break;</span>
+                             
+			  case &quot;tempo&quot;:    
+<span class="nc" id="L105">                          visualizza.iniziaPartita();</span>
+<span class="nc" id="L106">                     break;</span>
+                         
+			  case &quot;mosse&quot;: 
+<span class="nc" id="L109">                          visualizza.iniziaPartita();</span>
+<span class="nc" id="L110">                     break;</span>
+                     
+			  case &quot;prese&quot;: 
+<span class="nc" id="L113">				          visualizza.iniziaPartita();</span>
+<span class="nc" id="L114">				     break;</span>
+                     
+              case &quot;gioca&quot;:
+                        	
+                         
+<span class="nc" id="L119">                             Dama dama_bianca[] = new Dama[13];                                              </span>
+<span class="nc" id="L120">                             Dama dama_nera[] = new Dama[13];</span>
+<span class="nc" id="L121">                             Mossa mossa = new Mossa();</span>
+<span class="nc" id="L122">                             String turno = &quot;nero&quot;;</span>
+<span class="nc" id="L123">                             String mossa_eseguita = &quot;primo_giro&quot;;</span>
+                             
+<span class="nc" id="L125">                             List &lt;String&gt; mosse = new ArrayList&lt;&gt;(); </span>
+                                                                                                           
+                             
+<span class="nc bnc" id="L128" title="All 2 branches missed.">                             for (int i = 0; i &lt; 12; i++) {                             //inizializzazione pedine bianche             </span>
+<span class="nc" id="L129">                                Dama transizione = new Dama();                                           </span>
+<span class="nc" id="L130">                                transizione.inizializza_pedine_bianche(transizione, i);                 </span>
+<span class="nc" id="L131">                                dama_bianca[i] = transizione;                                         </span>
+                             }                                                                        
+                                                                                                     
+<span class="nc bnc" id="L134" title="All 2 branches missed.">                             for (int i = 0; i &lt; 12; i++) {                             //inizializzazione pedine nere          </span>
+<span class="nc" id="L135">                                Dama transizione = new Dama();                                    </span>
+<span class="nc" id="L136">                                transizione.inizializza_pedine_nere(transizione, i);             </span>
+<span class="nc" id="L137">                                dama_nera[i] = transizione;                                    </span>
+                             }                                                                 
+                                                                                               
+<span class="nc" id="L140">                             System.out.print(&quot;Damiera inizializzata\n&quot;);</span>
+
+                             
+                             
+                             
+<span class="nc" id="L145">                            	Cronometro tempo_bianco = new Cronometro();</span>
+                            	
+<span class="nc" id="L147">                            	Cronometro tempo_nero = new Cronometro();</span>
+                            	
+<span class="nc" id="L149">                            	tempo_bianco.azzera();</span>
+                            	
+<span class="nc" id="L151">                            	tempo_nero.azzera();</span>
+
+<span class="nc" id="L153">                                System.out.println(&quot;Cronometro partito\n&quot;);               </span>
+                              
+                             
+                             
+                             
+<span class="nc bnc" id="L158" title="All 2 branches missed.">                                               while((comando.contains(&quot;abbandona&quot;))==false){</span>
+<span class="nc bnc" id="L159" title="All 4 branches missed.">                                            	   if(turno.contentEquals(&quot;nero&quot;) &amp;&amp; (mossa_eseguita.contentEquals(&quot;primo_giro&quot;))) {</span>
+<span class="nc" id="L160">                                            		   mossa_eseguita = &quot;nessuna_mossa&quot;;</span>
+
+                                                     
+<span class="nc" id="L163">                                                       turno = &quot;bianco&quot;;</span>
+                                                   	   
+<span class="nc" id="L165">                                                   	   tempo_bianco.avanza();  </span>
+
+<span class="nc" id="L167">                                                       System.out.println(&quot;SEI IL &quot;+turno.toUpperCase());                      //Switch turno</span>
+                                            	   }
+<span class="nc bnc" id="L169" title="All 4 branches missed.">                                            	   else if ((mossa_eseguita.contentEquals(&quot;eseguita&quot;)) &amp;&amp; (turno.contentEquals(&quot;nero&quot;))) {</span>
+<span class="nc" id="L170">                                            		   mossa_eseguita = &quot;nessuna_mossa&quot;;</span>
+<span class="nc" id="L171">                                            		   System.out.println(&quot;Cambio giocatore &quot;);</span>
+                                                       
+<span class="nc" id="L173">                                                       turno = &quot;bianco&quot;;</span>
+<span class="nc" id="L174">                                                   	   tempo_nero.ferma();</span>
+<span class="nc" id="L175">                                                   	   tempo_bianco.avanza();  </span>
+
+<span class="nc" id="L177">                                                       System.out.println(&quot;SEI IL &quot;+turno.toUpperCase());         </span>
+                                            	   }
+<span class="nc bnc" id="L179" title="All 6 branches missed.">                                            	   else if(turno.contentEquals(&quot;bianco&quot;) &amp;&amp; (mossa_eseguita.contentEquals(&quot;primo_giro&quot;) || mossa_eseguita.contentEquals(&quot;eseguita&quot;))) {</span>
+                                                      
+<span class="nc" id="L181">                                            		   System.out.println(&quot;Cambio giocatore &quot;);</span>
+                                            		  
+<span class="nc" id="L183">                                            		   turno = &quot;nero&quot;;</span>
+<span class="nc" id="L184">                                            		   mossa_eseguita = &quot;nessuna_mossa&quot;;</span>
+                                                       
+<span class="nc" id="L186">                                            		  tempo_bianco.ferma();  </span>
+<span class="nc" id="L187">                                                   	   tempo_nero.avanza();  </span>
+                                            		   
+<span class="nc" id="L189">                                            		   System.out.println(&quot;SEI IL &quot;+turno.toUpperCase());                      //Switch turno</span>
+
+                                            	   }
+                                            	   
+<span class="nc" id="L193">                                                           System.out.print(&quot;Inserire un comando valido o digitare help\n&quot;);</span>
+<span class="nc" id="L194">                                                                            comando = input.nextLine();</span>
+                
+<span class="nc bnc" id="L196" title="All 8 branches missed.">                             switch (comando) {</span>
+                             
+                             case &quot;prese&quot;: 
+<span class="nc" id="L199">                            	 System.out.print(&quot;Bianco: &quot;);</span>
+<span class="nc bnc" id="L200" title="All 2 branches missed.">                            	 for (int i = 0; i &lt; 12; i++) {                             //inizializzazione pedine bianche             </span>
+
+<span class="nc bnc" id="L202" title="All 2 branches missed.">                            		 if(dama_nera[i].rileva_cella() == -1) {</span>
+                            			 
+<span class="nc" id="L204">                                    	 System.out.print(dama_nera[i].stampa_pedina());</span>
+
+                            		 }
+                            	 }         
+<span class="nc" id="L208">                            	 System.out.println();</span>
+                                                                                                          
+<span class="nc" id="L210">                            	 System.out.print(&quot;Nero: &quot;);</span>
+<span class="nc bnc" id="L211" title="All 2 branches missed.">                            	 for (int i = 0; i &lt; 12; i++) {                             //inizializzazione pedine bianche             </span>
+
+<span class="nc bnc" id="L213" title="All 2 branches missed.">                            		 if(dama_bianca[i].rileva_cella() == -1) {</span>
+                            			 
+<span class="nc" id="L215">                                    	 System.out.print(dama_bianca[i].stampa_pedina());</span>
+
+                            		 }
+                            	 } 
+<span class="nc" id="L219">                            	 System.out.println();</span>
+
+<span class="nc" id="L221">       				             break;</span>
+                             
+                             case &quot;mosse&quot;: 
+<span class="nc" id="L224">                            	        mosse.forEach(System.out::println);</span>
+<span class="nc" id="L225">                            	 break;</span>
+                            
+                             case &quot;damiera&quot;:
+<span class="nc" id="L228">			                	        visualizza.stampaDamiera(dama_bianca, dama_nera);</span>
+<span class="nc" id="L229">                            	 break;</span>
+ 			             
+                             case&quot;numeri&quot;:
+<span class="nc" id="L232">                                        visualizza.stampaNumeri();</span>
+<span class="nc" id="L233">                                 break;</span>
+                                                   
+                             case &quot;tempo&quot;:
+<span class="nc" id="L236">                                 System.out.println(&quot;Per il Bianco sono passati: &quot;+tempo_bianco.toString()+&quot; minuti&quot;);  </span>
+<span class="nc" id="L237">                                 System.out.println(&quot;Mentre&quot;);  </span>
+<span class="nc" id="L238">                                 System.out.println(&quot;Per il Nero sono passati: &quot;+tempo_nero.toString()+&quot; minuti\n&quot;);     </span>
+<span class="nc" id="L239">                                 break;</span>
+ 
+		                     case &quot;help&quot;:
+<span class="nc" id="L242">		                    	       visualizza.stampaAiuto();</span>
+<span class="nc" id="L243">                                 break;</span>
+                                                          
+			                 case &quot;abbandona&quot;:
+			                	 
+<span class="nc" id="L247">                             System.out.print(&quot;\nVuoi davvvero abbandonare la partita (la vittoria sara' assegnata all'avversario)? digita si per uscire\n&quot;);</span>
+		                 
+<span class="nc" id="L249">                             comando = input.nextLine();</span>
+			           
+<span class="nc bnc" id="L251" title="All 2 branches missed.">                             if (comando.contentEquals(&quot;si&quot;)){</span>
+			        	   
+<span class="nc bnc" id="L253" title="All 2 branches missed.">                            	 if(turno.contentEquals(&quot;bianco&quot;)) {</span>
+			        	   
+<span class="nc" id="L255">                            		 System.out.print(&quot;IL NERO HA VINTO\n&quot;);</span>
+			        	   }
+			        	   
+<span class="nc bnc" id="L258" title="All 2 branches missed.">                            	 if(turno.contentEquals(&quot;nero&quot;)) {</span>
+				        	
+<span class="nc" id="L260">                            		 System.out.print(&quot;IL BIANCO HA VINTO\n&quot;);</span>
+			                                         	   }
+<span class="nc" id="L262">			        	   tempo_bianco.ferma();</span>
+<span class="nc" id="L263">			        	   tempo_nero.ferma();</span>
+
+<span class="nc" id="L265">			                 comando = &quot;abbandona&quot;;</span>
+
+			                                               }
+                             break;
+                                               
+                             default: 
+<span class="nc" id="L271">                            	 mossa.decodificaMossa(comando);</span>
+
+<span class="nc bnc" id="L273" title="All 2 branches missed.">                            	 if(mossa.validaMossa(dama_bianca, dama_nera, turno)) {</span>
+
+<span class="nc bnc" id="L275" title="All 2 branches missed.">                            		 if (mossa.suddividiTipologia(dama_nera,dama_bianca,turno)) {</span>
+                         		   
+<span class="nc" id="L277">                            	           mossa_eseguita = &quot;eseguita&quot;;</span>
+                            	           
+<span class="nc" id="L279">                            	           visualizza.stampaDamiera(dama_bianca, dama_nera);</span>
+                            	           
+<span class="nc bnc" id="L281" title="All 2 branches missed.">                            	           if(turno.contentEquals(&quot;bianco&quot;)) { </span>
+<span class="nc" id="L282">                            	        	   mosse.add(&quot;B:&quot;+comando);</span>
+                            	           }
+<span class="nc bnc" id="L284" title="All 2 branches missed.">                            	           else if(turno.contentEquals(&quot;nero&quot;)) {</span>
+<span class="nc" id="L285">                            	        	   mosse.add(&quot;N:&quot;+comando);</span>
+                            	           }
+                            	                                                                      }
+                             }
+                              else {
+<span class="nc" id="L290">                            	  System.out.println(&quot;Mossa inserita non valida&quot;);</span>
+                              }
+                             }
+                                                                                                      }
+	                      }
+}
+<span class="nc" id="L296">}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

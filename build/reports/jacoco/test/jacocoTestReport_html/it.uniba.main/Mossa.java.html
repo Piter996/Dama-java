@@ -1,0 +1,925 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Mossa.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">dama</a> &gt; <a href="index.source.html" class="el_package">it.uniba.main</a> &gt; <span class="el_source">Mossa.java</span></div><h1>Mossa.java</h1><pre class="source lang-java linenums">/**
+ * 
+ * &lt;&lt;Control&gt;&gt;
+ * 
+ * Classe che si occupa della decodifica e quindi dell'esecuzione
+ * delle mosse immesse e nonché dei controlli che necessari
+ */
+
+package it.uniba.main;
+
+<span class="nc" id="L11">public class Mossa {</span>
+	
+	/** carica la cella di partenza della pedina immessa */
+<span class="nc" id="L14">	private int cella_partenza = 0;</span>
+	
+	/** carica la cella di destinazione della pedina immessa */
+<span class="nc" id="L17">	private int cella_destinazione = 0;</span>
+	
+	/** carica la cella di destinazione finale in caso di mossa multipla */
+<span class="nc" id="L20">	private int cella_destinazione2 = 0; </span>
+
+	/** carica la cella di destinazione finale in caso di mossa multipla */
+<span class="nc" id="L23">    private int cella_destinazione3 = 0;</span>
+	
+	/** variabile di stato che indica se si tratta di una mossa multipla o meno */
+<span class="nc" id="L26">	private int lunghezza_mossa = 0;</span>
+	
+	/** Memorizza il tipo di mossa che si vuole svolgere */
+<span class="nc" id="L29">	private String tipologia_mossa = new String();</span>
+    
+	/** Memorizza l'indice della dama */
+<span class="nc" id="L32"> 	private int indice_dama = 0;</span>
+	
+	/** Rileva in base alla mossa inserita dal giocatore, le funzioni da chiamare 
+	 * e restituisce true se tutto viene eseguito correttamente
+	 */
+	public boolean suddividiTipologia(Dama dama_nera[], Dama dama_bianca[],String colore) {
+<span class="nc" id="L38">		boolean eseguito = false;</span>
+<span class="nc" id="L39">		boolean pass = true;</span>
+		
+<span class="nc bnc" id="L41" title="All 2 branches missed.">		if ((this.tipologia_mossa.contentEquals(&quot;presa_semplice&quot;))) { </span>
+<span class="nc bnc" id="L42" title="All 2 branches missed.">			if (this.lunghezza_mossa == 2){</span>
+<span class="nc bnc" id="L43" title="All 2 branches missed.">				if(this.controlloPresa(dama_bianca, dama_nera, colore)) {</span>
+
+<span class="nc bnc" id="L45" title="All 2 branches missed.">				if(this.presa_semplice(dama_nera, dama_bianca, colore)) {</span>
+<span class="nc" id="L46">					eseguito = true;</span>
+			
+				}
+				}
+			}
+			}
+<span class="nc bnc" id="L52" title="All 2 branches missed.">			if (this.lunghezza_mossa &gt;= 3) {    </span>
+
+<span class="nc" id="L54">				this.tipologia_mossa = &quot;presa_semplice&quot;;</span>
+				
+<span class="nc bnc" id="L56" title="All 2 branches missed.">				if (this.validaMossa(dama_bianca, dama_nera, colore)) {</span>
+
+					
+<span class="nc bnc" id="L59" title="All 2 branches missed.">					if (this.controlloPresa(dama_bianca, dama_nera, colore)) {</span>
+					
+<span class="nc" id="L61">					int backup = this.cella_partenza;</span>
+<span class="nc" id="L62">					this.cella_partenza = this.cella_destinazione;</span>
+<span class="nc" id="L63">					this.cella_destinazione = this.cella_destinazione2;</span>
+					
+<span class="nc bnc" id="L65" title="All 2 branches missed.">										if(this.controlloPresa(dama_bianca, dama_nera, colore)) {</span>
+
+<span class="nc bnc" id="L67" title="All 2 branches missed.">					                      if (this.validaMossa(dama_bianca, dama_nera, colore)) {</span>
+					                    	 
+<span class="nc bnc" id="L69" title="All 2 branches missed.">					                    	  if (this.lunghezza_mossa == 4) {</span>
+<span class="nc" id="L70">					                    		  pass = false;</span>
+<span class="nc" id="L71">					                    		  int backup2 = 0;</span>
+					                    		  
+<span class="nc" id="L73">					                    		  backup2 = this.cella_partenza;</span>
+<span class="nc" id="L74">					                    		  this.cella_partenza = this.cella_destinazione;</span>
+<span class="nc" id="L75">					                    		  this.cella_destinazione = this.cella_destinazione3;</span>
+					                    		  
+<span class="nc bnc" id="L77" title="All 2 branches missed.">					                    			if(this.controlloPresa(dama_bianca, dama_nera, colore)) {</span>
+
+<span class="nc bnc" id="L79" title="All 2 branches missed.">									                      if (this.validaMossa(dama_bianca, dama_nera, colore)) {</span>
+<span class="nc" id="L80">									                    	  this.cella_destinazione = this.cella_partenza;</span>
+<span class="nc" id="L81">									                    	  this.cella_partenza = backup2;</span>
+<span class="nc" id="L82">									                    	  pass = true;</span>
+									                    	  
+					                    		  
+									                      }
+					                    			}
+					                    	  }
+<span class="nc bnc" id="L88" title="All 2 branches missed.">					                    	  if(pass) {</span>
+
+<span class="nc" id="L90">						this.cella_destinazione = this.cella_partenza;</span>
+<span class="nc" id="L91">						this.cella_partenza = backup;</span>
+						    
+<span class="nc bnc" id="L93" title="All 2 branches missed.">						if(this.presa_semplice(dama_nera, dama_bianca, colore)) {</span>
+
+<span class="nc" id="L95">							this.cella_partenza = this.cella_destinazione;</span>
+<span class="nc" id="L96">							this.cella_destinazione = this.cella_destinazione2;</span>
+							
+<span class="nc bnc" id="L98" title="All 2 branches missed.">							if(this.presa_semplice(dama_nera, dama_bianca, colore)) {</span>
+								
+								
+<span class="nc bnc" id="L101" title="All 2 branches missed.">		                    	  if (this.lunghezza_mossa == 4) {</span>
+<span class="nc" id="L102">		                    		  this.cella_partenza = this.cella_destinazione;</span>
+<span class="nc" id="L103">		                    		  this.cella_destinazione = this.cella_destinazione3;</span>
+<span class="nc bnc" id="L104" title="All 2 branches missed.">		                    		  if(this.presa_semplice(dama_nera, dama_bianca, colore)) {</span>
+<span class="nc" id="L105">		                    			  pass = true;</span>
+		                    		  }
+		                    	  }
+
+<span class="nc bnc" id="L109" title="All 2 branches missed.">								if(pass) {</span>
+<span class="nc" id="L110">							eseguito = true;</span>
+
+								}
+							}
+							}
+						
+						}						
+					}
+				}
+				}
+				}
+				
+			
+		}
+		
+<span class="nc bnc" id="L125" title="All 2 branches missed.">        if (this.tipologia_mossa.contentEquals(&quot;spostamento&quot;)) {</span>
+<span class="nc bnc" id="L126" title="All 2 branches missed.">			if(this.spostaPedina(dama_nera, dama_bianca, colore)) {</span>
+<span class="nc" id="L127">				eseguito = true;</span>
+			}
+		}		
+		
+<span class="nc" id="L131">		return eseguito;</span>
+	}
+		
+	/** Controlla che la casella di destinazione immessa non sia occupata e ne restituisce lo stato*/
+	private boolean controllaDestinazione(Dama dama_bianca[], Dama dama_nera[]){
+<span class="nc" id="L136">		boolean occupata = false;</span>
+				
+<span class="nc bnc" id="L138" title="All 2 branches missed.">				for(int i = 0 ; i &lt; 12 ; i++) {</span>
+<span class="nc bnc" id="L139" title="All 2 branches missed.">					if(dama_bianca[i].rileva_cella() == this.cella_destinazione) {</span>
+<span class="nc" id="L140">						System.out.println(&quot;Casella di destinazione occupata&quot;);</span>
+<span class="nc" id="L141">						occupata = true;</span>
+					}
+				}
+		
+<span class="nc bnc" id="L145" title="All 2 branches missed.">				for(int i = 0 ; i &lt; 12 ; i++) {</span>
+<span class="nc bnc" id="L146" title="All 2 branches missed.">					if(dama_nera[i].rileva_cella() == this.cella_destinazione) {</span>
+<span class="nc" id="L147">						System.out.println(&quot;Casella di destinazione occupata&quot;);</span>
+<span class="nc" id="L148">						occupata = true;</span>
+					}
+				}
+				
+<span class="nc" id="L152">		return occupata;</span>
+	}
+
+	/** Metodo che acquisice la mossa digitata dal giocatore */
+	public void decodificaMossa(String movimento) {
+<span class="nc bnc" id="L157" title="All 2 branches missed.">		if (movimento.contains(&quot;-&quot;) ) {</span>
+<span class="nc" id="L158">			tipologia_mossa = &quot;spostamento&quot;;</span>
+
+<span class="nc" id="L160">					String [] decodifica = movimento.split(&quot;-&quot;);</span>
+try {
+<span class="nc" id="L162">		this.cella_partenza  = Integer.parseInt(decodifica[0]);</span>
+<span class="nc" id="L163">		this.cella_partenza --;</span>
+<span class="nc" id="L164">		this.cella_destinazione = Integer.parseInt(decodifica[1]);</span>
+<span class="nc" id="L165">		this.cella_destinazione--;</span>
+<span class="nc" id="L166">		this.lunghezza_mossa = 2;</span>
+<span class="nc" id="L167">		} catch (NumberFormatException ex) {</span>
+
+<span class="nc" id="L169">		}</span>
+		}
+<span class="nc bnc" id="L171" title="All 2 branches missed.">		if( movimento.contains(&quot;x&quot;)) { </span>
+<span class="nc" id="L172">			String [] decodifica = movimento.split(&quot;x&quot;);</span>
+<span class="nc" id="L173">			tipologia_mossa = &quot;presa_semplice&quot;;</span>
+			try {
+<span class="nc" id="L175">				this.cella_partenza  = Integer.parseInt(decodifica[0]);</span>
+<span class="nc" id="L176">				this.cella_partenza --;</span>
+<span class="nc" id="L177">				this.cella_destinazione = Integer.parseInt(decodifica[1]);</span>
+<span class="nc" id="L178">				this.cella_destinazione--;</span>
+<span class="nc" id="L179">				this.lunghezza_mossa = 2;</span>
+				
+<span class="nc bnc" id="L181" title="All 2 branches missed.">				if(decodifica.length &gt;= 3) {</span>
+<span class="nc" id="L182">					tipologia_mossa = &quot;presa_multipla&quot;;</span>
+
+<span class="nc" id="L184">			this.lunghezza_mossa =decodifica.length;</span>
+<span class="nc" id="L185">			this.cella_destinazione2 = Integer.parseInt(decodifica[2]); </span>
+<span class="nc" id="L186">			this.cella_destinazione2--;</span>
+			
+<span class="nc bnc" id="L188" title="All 2 branches missed.">			if(decodifica.length &gt;=4) {</span>
+<span class="nc" id="L189">				this.cella_destinazione3 = Integer.parseInt(decodifica[3]); </span>
+<span class="nc" id="L190">				this.cella_destinazione3--;</span>
+			}
+		}
+<span class="nc" id="L193">				} catch (NumberFormatException ex) {</span>
+
+<span class="nc" id="L195">				}</span>
+		}
+		
+				
+		
+		
+	
+
+<span class="nc" id="L203">	}</span>
+	
+	/** Finalizza le operazioni di presa e restituisce true se viene eseguito tutto correttamente */
+	  private boolean effettuaPresa(Dama dama_bianca[], Dama dama_nera[],String colore) { 
+<span class="nc" id="L207">		boolean presente = false;</span>
+		
+		
+<span class="nc bnc" id="L210" title="All 2 branches missed.">		if (colore.contentEquals(&quot;nero&quot;)) {</span>
+
+<span class="nc bnc" id="L212" title="All 2 branches missed.">			if (this.controlloRiga()) {</span>
+				
+<span class="nc bnc" id="L214" title="All 2 branches missed.">if(dama_nera[this.indice_dama].tipoPedina().contentEquals(&quot;dama&quot;)) {</span>
+					
+<span class="nc bnc" id="L216" title="All 2 branches missed.">					for(int i = 0 ; i &lt; 12 ; i++) {</span>
+
+<span class="nc bnc" id="L218" title="All 8 branches missed.">					if(((dama_bianca[i].rileva_cella() == (this.cella_partenza - 4)) &amp;&amp; (this.cella_destinazione == (this.cella_partenza - 9))) || ((dama_bianca[i].rileva_cella() ==(this.cella_partenza - 3)) &amp;&amp; (this.cella_destinazione == (this.cella_partenza - 7))))  {</span>
+<span class="nc" id="L219">						dama_bianca[i].eliminaPedina();</span>
+<span class="nc" id="L220">						presente = true;</span>
+<span class="nc" id="L221">						i = 12;</span>
+					 }
+					
+					
+
+<span class="nc bnc" id="L226" title="All 8 branches missed.">					else if(((dama_bianca[i].rileva_cella() == (this.cella_partenza + 4)) &amp;&amp; (this.cella_destinazione == (this.cella_partenza + 7))) || ((dama_bianca[i].rileva_cella() == (this.cella_partenza + 5)) &amp;&amp; (this.cella_destinazione == (this.cella_partenza + 9))))  {</span>
+<span class="nc" id="L227">							dama_bianca[i].eliminaPedina();</span>
+
+<span class="nc" id="L229">							presente = true;</span>
+<span class="nc" id="L230">							 i = 12;</span>
+						}
+					}
+				}else {
+<span class="nc bnc" id="L234" title="All 2 branches missed.">		for(int i = 0 ; i &lt; 12 ; i++) {</span>
+
+<span class="nc bnc" id="L236" title="All 8 branches missed.">			if(((dama_bianca[i].rileva_cella() == (this.cella_partenza + 4)) &amp;&amp; (this.cella_destinazione == (this.cella_partenza + 7))) || ((dama_bianca[i].rileva_cella() == (this.cella_partenza + 5)) &amp;&amp; (this.cella_destinazione == (this.cella_partenza + 9))))  {</span>
+<span class="nc" id="L237">				dama_bianca[i].eliminaPedina();</span>
+
+<span class="nc" id="L239">				presente = true;</span>
+<span class="nc" id="L240">				 i = 12;</span>
+			}
+		}
+			}
+		}
+			
+<span class="nc bnc" id="L246" title="All 2 branches missed.">	    if (!(this.controlloRiga())) {</span>
+	    	
+<span class="nc bnc" id="L248" title="All 2 branches missed.">if(dama_nera[this.indice_dama].tipoPedina().contentEquals(&quot;dama&quot;)) {</span>
+				
+<span class="nc bnc" id="L250" title="All 2 branches missed.">				for(int i = 0 ; i &lt; 12 ; i++) {</span>
+
+<span class="nc bnc" id="L252" title="All 8 branches missed.">					if(((dama_bianca[i].rileva_cella() == (this.cella_partenza - 4)) &amp;&amp; (this.cella_destinazione == (this.cella_partenza - 7))) || ((dama_bianca[i].rileva_cella() ==(this.cella_partenza - 5)) &amp;&amp; (this.cella_destinazione == (this.cella_partenza - 9))))  {</span>
+<span class="nc" id="L253">						dama_bianca[i].eliminaPedina();</span>
+<span class="nc" id="L254">						presente = true;</span>
+<span class="nc" id="L255">						i = 12;</span>
+		             }
+				
+				
+
+<span class="nc bnc" id="L260" title="All 8 branches missed.">				else if(((dama_nera[i].rileva_cella() == (this.cella_partenza + 4)) &amp;&amp; (this.cella_destinazione == (this.cella_partenza + 9))) || ((dama_bianca[i].rileva_cella() ==(this.cella_partenza + 3)) &amp;&amp; (this.cella_destinazione == (this.cella_partenza + 7))) )  {</span>
+<span class="nc" id="L261">					dama_bianca[i].eliminaPedina();</span>
+<span class="nc" id="L262">					presente = true;</span>
+<span class="nc" id="L263">					i = 12;</span>
+				 }
+				}
+			}else {
+<span class="nc bnc" id="L267" title="All 2 branches missed.">		for(int i = 0 ; i &lt; 12 ; i++) {</span>
+<span class="nc bnc" id="L268" title="All 8 branches missed.">			if(((dama_bianca[i].rileva_cella() == (this.cella_partenza + 4)) &amp;&amp; (this.cella_destinazione == (this.cella_partenza + 9))) || ((dama_bianca[i].rileva_cella() ==(this.cella_partenza + 3)) &amp;&amp; (this.cella_destinazione == (this.cella_partenza + 7))) )  {</span>
+<span class="nc" id="L269">				dama_bianca[i].eliminaPedina();</span>
+<span class="nc" id="L270">				presente = true;</span>
+<span class="nc" id="L271">				i = 12;</span>
+			 }
+		}
+	    }
+		}
+			
+		}
+<span class="nc bnc" id="L278" title="All 2 branches missed.">		if (colore.contentEquals(&quot;bianco&quot;)) {</span>
+
+<span class="nc bnc" id="L280" title="All 2 branches missed.">			if (this.controlloRiga()) {</span>
+				
+<span class="nc bnc" id="L282" title="All 2 branches missed.">				if(dama_bianca[this.indice_dama].tipoPedina().contentEquals(&quot;dama&quot;)) {</span>
+					
+<span class="nc bnc" id="L284" title="All 2 branches missed.">					for(int i = 0 ; i &lt; 12 ; i++) {</span>
+
+<span class="nc bnc" id="L286" title="All 8 branches missed.">					if(((dama_nera[i].rileva_cella() == (this.cella_partenza - 4)) &amp;&amp; (this.cella_destinazione == (this.cella_partenza - 9))) || ((dama_nera[i].rileva_cella() ==(this.cella_partenza - 3)) &amp;&amp; (this.cella_destinazione == (this.cella_partenza - 7))))  {</span>
+<span class="nc" id="L287">						dama_nera[i].eliminaPedina();</span>
+<span class="nc" id="L288">						presente = true;</span>
+<span class="nc" id="L289">						i = 12;</span>
+					 }
+					
+					
+
+<span class="nc bnc" id="L294" title="All 8 branches missed.">					else if(((dama_nera[i].rileva_cella() == (this.cella_partenza + 4)) &amp;&amp; (this.cella_destinazione == (this.cella_partenza + 7))) || ((dama_nera[i].rileva_cella() == (this.cella_partenza + 5)) &amp;&amp; (this.cella_destinazione == (this.cella_partenza + 9))))  {</span>
+<span class="nc" id="L295">							dama_nera[i].eliminaPedina();</span>
+
+<span class="nc" id="L297">							presente = true;</span>
+<span class="nc" id="L298">							 i = 12;</span>
+						}
+					}
+				}else {
+				
+<span class="nc bnc" id="L303" title="All 2 branches missed.">		for(int i = 0 ; i &lt; 12 ; i++) {</span>
+
+<span class="nc bnc" id="L305" title="All 8 branches missed.">			if(((dama_nera[i].rileva_cella() == (this.cella_partenza - 4)) &amp;&amp; (this.cella_destinazione == (this.cella_partenza - 9))) || ((dama_nera[i].rileva_cella() ==(this.cella_partenza - 3)) &amp;&amp; (this.cella_destinazione == (this.cella_partenza - 7))))  {</span>
+<span class="nc" id="L306">				dama_nera[i].eliminaPedina();</span>
+<span class="nc" id="L307">				presente = true;</span>
+<span class="nc" id="L308">				i = 12;</span>
+			 }
+		}
+			}
+		}
+					
+<span class="nc bnc" id="L314" title="All 2 branches missed.">		if (!(this.controlloRiga())) {</span>
+<span class="nc bnc" id="L315" title="All 2 branches missed.">			if(dama_bianca[this.indice_dama].tipoPedina().contentEquals(&quot;dama&quot;)) {</span>
+				
+<span class="nc bnc" id="L317" title="All 2 branches missed.">				for(int i = 0 ; i &lt; 12 ; i++) {</span>
+
+<span class="nc bnc" id="L319" title="All 8 branches missed.">					if(((dama_nera[i].rileva_cella() == (this.cella_partenza - 4)) &amp;&amp; (this.cella_destinazione == (this.cella_partenza - 7))) || ((dama_nera[i].rileva_cella() ==(this.cella_partenza - 5)) &amp;&amp; (this.cella_destinazione == (this.cella_partenza - 9))))  {</span>
+<span class="nc" id="L320">						dama_nera[i].eliminaPedina();</span>
+<span class="nc" id="L321">						presente = true;</span>
+<span class="nc" id="L322">						i = 12;</span>
+		             }
+				
+				
+
+<span class="nc bnc" id="L327" title="All 8 branches missed.">				else if(((dama_nera[i].rileva_cella() == (this.cella_partenza + 4)) &amp;&amp; (this.cella_destinazione == (this.cella_partenza + 9))) || ((dama_nera[i].rileva_cella() ==(this.cella_partenza + 3)) &amp;&amp; (this.cella_destinazione == (this.cella_partenza + 7))) )  {</span>
+<span class="nc" id="L328">					dama_nera[i].eliminaPedina();</span>
+<span class="nc" id="L329">					presente = true;</span>
+<span class="nc" id="L330">					i = 12;</span>
+				 }
+				}
+			}else {
+			
+<span class="nc bnc" id="L335" title="All 2 branches missed.">		for(int i = 0 ; i &lt; 12 ; i++) {</span>
+
+<span class="nc bnc" id="L337" title="All 8 branches missed.">			if(((dama_nera[i].rileva_cella() == (this.cella_partenza - 4)) &amp;&amp; (this.cella_destinazione == (this.cella_partenza - 7))) || ((dama_nera[i].rileva_cella() ==(this.cella_partenza - 5)) &amp;&amp; (this.cella_destinazione == (this.cella_partenza - 9))))  {</span>
+<span class="nc" id="L338">				dama_nera[i].eliminaPedina();</span>
+<span class="nc" id="L339">				presente = true;</span>
+<span class="nc" id="L340">				i = 12;</span>
+             }
+		}
+		}
+		}
+
+		}
+		
+<span class="nc" id="L348">return presente;</span>
+		
+	}
+
+	/** Contolla se la cella presa in considerazione si trova all'interno di una riga pari, e restituisce true in caso positivo */
+	private boolean controlloRiga() {
+		
+<span class="nc" id="L355">	    boolean riga_pari = false;</span>
+
+<span class="nc bnc" id="L357" title="All 16 branches missed.">		if ((((this.cella_partenza + 1) &gt; 4) &amp;&amp; ((this.cella_partenza + 1) &lt; 9)) || (((this.cella_partenza + 1) &gt; 12) &amp;&amp; ((this.cella_partenza + 1) &lt; 17)) || (((this.cella_partenza + 1) &gt; 20) &amp;&amp; ((this.cella_partenza + 1) &lt;25 )) || (((this.cella_partenza + 1) &gt; 28) &amp;&amp; ((this.cella_partenza + 1) &lt; 33))) {</span>
+<span class="nc" id="L358">			riga_pari = true;</span>
+
+		}
+		else {
+<span class="nc" id="L362">			riga_pari = false;</span>
+
+		}
+		
+<span class="nc" id="L366">		return riga_pari;</span>
+	}
+	
+    /** Controlla che la mossa inserita dal giocatore sia valida in base alle varie caratteristiche dalla pedina che si sta muovendo
+     * e restituisce true in caso positivo
+     */		
+	public boolean validaMossa (Dama dama_bianca [],Dama dama_nera[], String colore) {
+<span class="nc" id="L373">			boolean valida=false;</span>
+
+<span class="nc bnc" id="L375" title="All 2 branches missed.">           if(this.tipologia_mossa.contentEquals(&quot;presa_multipla&quot;)) { </span>
+<span class="nc" id="L376">				valida = true;</span>
+				
+           }
+                    
+           
+<span class="nc bnc" id="L381" title="All 3 branches missed.">           switch(colore) {</span>
+           
+           case &quot;bianco&quot;:
+<span class="nc bnc" id="L384" title="All 2 branches missed.">			for (int i = 0; i &lt; 12; i++) {</span>
+<span class="nc bnc" id="L385" title="All 2 branches missed.">					if (dama_bianca[i].rileva_cella() == cella_partenza) {</span>
+<span class="nc" id="L386">						this.indice_dama = i;</span>
+<span class="nc" id="L387">						i=12;						</span>
+					}
+				}
+			
+<span class="nc" id="L391">           break;</span>
+			
+           case &quot;nero&quot;:
+<span class="nc bnc" id="L394" title="All 2 branches missed.">        	   for (int i = 0; i &lt; 12; i++) {</span>
+<span class="nc bnc" id="L395" title="All 2 branches missed.">					if (dama_nera[i].rileva_cella() == cella_partenza) {</span>
+<span class="nc" id="L396">						this.indice_dama = i;</span>
+<span class="nc" id="L397">						i=12;			</span>
+					}
+				}
+			break;
+			
+			
+			}
+	
+<span class="nc bnc" id="L405" title="All 3 branches missed.">			switch (colore) {</span>
+			
+			case &quot;bianco&quot;:
+<span class="nc bnc" id="L408" title="All 2 branches missed.">			 if(dama_bianca[indice_dama].tipoPedina().contentEquals(&quot;dama&quot;)) {</span>
+				    
+<span class="nc bnc" id="L410" title="All 4 branches missed.">				 if(((cella_partenza + 1)%8 == 0) || (cella_partenza + 1)%8 == 1) {</span>
+
+
+<span class="nc bnc" id="L413" title="All 4 branches missed.">					   if(((cella_destinazione + 1) == ((cella_partenza + 1)  - 4)) || ((cella_destinazione + 1) == ((cella_partenza + 1)  + 4))) {</span>
+
+<span class="nc" id="L415">					   valida = true;</span>
+					   
+					   }
+			    }
+<span class="nc bnc" id="L419" title="All 2 branches missed.">				 if (this.controlloRiga()) {</span>
+						
+<span class="nc bnc" id="L421" title="All 2 branches missed.">				 if(this.tipologia_mossa.contentEquals(&quot;spostamento&quot;)) {</span>
+
+<span class="nc bnc" id="L423" title="All 4 branches missed.">					 					if(((cella_destinazione + 1) == ((cella_partenza + 1) - 4)) || ((cella_destinazione + 1) == ((cella_partenza + 1) - 3)) ) {</span>
+<span class="nc" id="L424">					 				         valida = true;</span>
+
+					 				         }
+					 				
+<span class="nc bnc" id="L428" title="All 4 branches missed.">					                    if(((cella_destinazione + 1) == ((cella_partenza + 1) + 4)) || ((cella_destinazione + 1) == ((cella_partenza + 1) + 5)) ) {</span>
+<span class="nc" id="L429">				                             valida = true;</span>
+
+            				        }
+				 }
+<span class="nc bnc" id="L433" title="All 2 branches missed.">			     if(this.tipologia_mossa.contentEquals(&quot;presa_semplice&quot;)) {</span>
+
+<span class="nc bnc" id="L435" title="All 4 branches missed.">					 					if(((cella_destinazione + 1) == ((cella_partenza + 1) - 9)) || ((cella_destinazione + 1) == ((cella_partenza + 1) - 7)) ) { //issue#25</span>
+<span class="nc" id="L436">					 				         valida = true;</span>
+
+					 				         }
+<span class="nc bnc" id="L439" title="All 4 branches missed.">					 					if(((cella_destinazione + 1) == ((cella_partenza + 1) + 9)) || ((cella_destinazione + 1) == ((cella_partenza + 1) + 7)) ) { //issue#25</span>
+<span class="nc" id="L440">									         valida = true;</span>
+
+									         }
+					 }
+					 				
+					 		}
+					 				
+<span class="nc bnc" id="L447" title="All 2 branches missed.">					 				if(!(this.controlloRiga())) {</span>
+
+
+<span class="nc bnc" id="L450" title="All 2 branches missed.">					 if(this.tipologia_mossa.contentEquals(&quot;spostamento&quot;)) {</span>
+<span class="nc bnc" id="L451" title="All 4 branches missed.">					 					if(((cella_destinazione + 1) == ((cella_partenza + 1) - 4)) || ((cella_destinazione + 1) == ((cella_partenza + 1) - 5)) ) {</span>
+<span class="nc" id="L452">					 				         valida = true;</span>
+
+					 				         }
+<span class="nc bnc" id="L455" title="All 4 branches missed.">					 					if(((cella_destinazione + 1) == ((cella_partenza + 1) + 4)) || ((cella_destinazione + 1) == ((cella_partenza + 1) + 3)) ) {</span>
+<span class="nc" id="L456">									         valida = true;</span>
+
+									         }
+					 				}
+<span class="nc bnc" id="L460" title="All 2 branches missed.">					 if(this.tipologia_mossa.contentEquals(&quot;presa_semplice&quot;)) {</span>
+
+<span class="nc bnc" id="L462" title="All 4 branches missed.">					 					if(((cella_destinazione + 1) == ((cella_partenza + 1) - 9)) || ((cella_destinazione + 1) == ((cella_partenza + 1) - 7)) ) { //issue#25</span>
+<span class="nc" id="L463">					 				         valida = true;</span>
+
+					 				         }
+<span class="nc bnc" id="L466" title="All 4 branches missed.">					 					if(((cella_destinazione + 1) == ((cella_partenza + 1) + 9)) || ((cella_destinazione + 1) == ((cella_partenza + 1) + 7)) ) { //issue#25</span>
+<span class="nc" id="L467">									         valida = true;</span>
+
+
+									         }
+					 			}
+					 			
+					 					}
+			 }
+			        break;
+			 
+			case &quot;nero&quot;:
+<span class="nc bnc" id="L478" title="All 2 branches missed.">				 if(dama_nera[indice_dama].tipoPedina().contentEquals(&quot;dama&quot;)) {</span>
+					    
+<span class="nc bnc" id="L480" title="All 4 branches missed.">					 if(((cella_partenza + 1)%8 == 0) || (cella_partenza + 1)%8 == 1) {</span>
+
+<span class="nc bnc" id="L482" title="All 4 branches missed.">						   if(((cella_destinazione + 1) == ((cella_partenza + 1)  - 4)) || ((cella_destinazione + 1) == ((cella_partenza + 1)  + 4))) {</span>
+						   
+<span class="nc" id="L484">						   valida = true;</span>
+						   
+						   }
+				    }
+<span class="nc bnc" id="L488" title="All 2 branches missed.">					 if (this.controlloRiga()) {</span>
+							
+							
+<span class="nc bnc" id="L491" title="All 2 branches missed.">					 if(this.tipologia_mossa.contentEquals(&quot;spostamento&quot;)) {</span>
+<span class="nc bnc" id="L492" title="All 4 branches missed.">						 					if(((cella_destinazione + 1) == ((cella_partenza + 1) - 4)) || ((cella_destinazione + 1) == ((cella_partenza + 1) - 3)) ) {</span>
+<span class="nc" id="L493">						 				         valida = true;</span>
+
+						 				         }
+						 				
+<span class="nc bnc" id="L497" title="All 4 branches missed.">						                    if(((cella_destinazione + 1) == ((cella_partenza + 1) + 4)) || ((cella_destinazione + 1) == ((cella_partenza + 1) + 5)) ) {</span>
+<span class="nc" id="L498">					                             valida = true;</span>
+	            				        }
+					 }
+<span class="nc bnc" id="L501" title="All 2 branches missed.">				     if(this.tipologia_mossa.contentEquals(&quot;presa_semplice&quot;)) {</span>
+
+<span class="nc bnc" id="L503" title="All 4 branches missed.">						 					if(((cella_destinazione + 1) == ((cella_partenza + 1) - 9)) || ((cella_destinazione + 1) == ((cella_partenza + 1) - 7)) ) { //issue#25</span>
+<span class="nc" id="L504">						 				         valida = true;</span>
+
+						 				         }
+<span class="nc bnc" id="L507" title="All 4 branches missed.">						 					if(((cella_destinazione + 1) == ((cella_partenza + 1) + 9)) || ((cella_destinazione + 1) == ((cella_partenza + 1) + 7)) ) { //issue#25</span>
+<span class="nc" id="L508">										         valida = true;</span>
+
+										         }
+						 }
+						 				
+						 		}
+						 				
+<span class="nc bnc" id="L515" title="All 2 branches missed.">						 				if(!(this.controlloRiga())) {</span>
+
+<span class="nc bnc" id="L517" title="All 2 branches missed.">						 if(this.tipologia_mossa.contentEquals(&quot;spostamento&quot;)) {</span>
+<span class="nc bnc" id="L518" title="All 4 branches missed.">						 					if(((cella_destinazione + 1) == ((cella_partenza + 1) - 4)) || ((cella_destinazione + 1) == ((cella_partenza + 1) - 5)) ) {</span>
+<span class="nc" id="L519">						 				         valida = true;</span>
+
+						 				         }
+<span class="nc bnc" id="L522" title="All 4 branches missed.">						 					if(((cella_destinazione + 1) == ((cella_partenza + 1) + 4)) || ((cella_destinazione + 1) == ((cella_partenza + 1) + 3)) ) {</span>
+<span class="nc" id="L523">										         valida = true;</span>
+
+										         }
+						 				}
+<span class="nc bnc" id="L527" title="All 2 branches missed.">						 if(this.tipologia_mossa.contentEquals(&quot;presa_semplice&quot;)) {</span>
+
+<span class="nc bnc" id="L529" title="All 4 branches missed.">						 					if(((cella_destinazione + 1) == ((cella_partenza + 1) - 9)) || ((cella_destinazione + 1) == ((cella_partenza + 1) - 7)) ) { //issue#25</span>
+<span class="nc" id="L530">						 				         valida = true;</span>
+
+						 				         }
+<span class="nc bnc" id="L533" title="All 4 branches missed.">						 					if(((cella_destinazione + 1) == ((cella_partenza + 1) + 9)) || ((cella_destinazione + 1) == ((cella_partenza + 1) + 7)) ) { //issue#25</span>
+<span class="nc" id="L534">										         valida = true;</span>
+
+										         }
+						 			}
+						 			
+						 					}
+				 }
+				        break;
+				 
+				
+			 
+	}
+			
+			
+<span class="nc bnc" id="L548" title="All 2 branches missed.">	if(colore.contentEquals(&quot;bianco&quot;)) {</span>
+
+<span class="nc bnc" id="L550" title="All 6 branches missed.">		if((((cella_partenza + 1) &lt;= 32) &amp;&amp; cella_partenza &gt; cella_destinazione) &amp;&amp; (cella_destinazione + 1) &gt;=0) {</span>
+
+<span class="nc bnc" id="L552" title="All 2 branches missed.">			if(this.tipologia_mossa.contentEquals(&quot;spostamento&quot;)) {</span>
+			
+<span class="nc bnc" id="L554" title="All 4 branches missed.">			    if(((cella_partenza + 1)%8 == 0) || (cella_partenza + 1)%8 == 1) {</span>
+
+<span class="nc bnc" id="L556" title="All 2 branches missed.">				   if((cella_destinazione + 1) == ((cella_partenza + 1)  - 4)) {</span>
+					
+<span class="nc" id="L558">					valida = true;</span>
+				}
+				
+				}
+			    
+			}
+<span class="nc bnc" id="L564" title="All 2 branches missed.">				else if (this.tipologia_mossa.contentEquals(&quot;presa_semplice&quot;)){</span>
+<span class="nc bnc" id="L565" title="All 4 branches missed.">					     if (((cella_partenza + 1)%8 == 0) &amp;&amp; ((cella_destinazione + 1) == ((cella_partenza + 1)  - 9))) { // caso di presa semplice </span>
+												
+<span class="nc" id="L567">							valida = true;</span>
+				
+						
+					}
+<span class="nc bnc" id="L571" title="All 4 branches missed.">					if (((cella_partenza + 1)%8 == 1) &amp;&amp; ((cella_destinazione + 1) == ((cella_partenza + 1)  - 7))) { // caso di presa semplice </span>
+						
+<span class="nc" id="L573">						valida = true;</span>
+			
+					
+				}
+				}
+					
+<span class="nc bnc" id="L579" title="All 4 branches missed.">		if(!(((cella_partenza + 1)%8 == 0) || (cella_partenza + 1)%8 == 1)) {</span>
+ 
+
+<span class="nc bnc" id="L582" title="All 2 branches missed.">				if (this.controlloRiga()) {</span>
+					
+					
+<span class="nc bnc" id="L585" title="All 2 branches missed.">if(this.tipologia_mossa.contentEquals(&quot;spostamento&quot;)) {</span>
+<span class="nc bnc" id="L586" title="All 4 branches missed.">					if(((cella_destinazione + 1) == ((cella_partenza + 1) - 4)) || ((cella_destinazione + 1) == ((cella_partenza + 1) - 3)) ) {</span>
+<span class="nc" id="L587">				         valida = true;</span>
+
+				         }
+				}
+
+<span class="nc bnc" id="L592" title="All 2 branches missed.">if(this.tipologia_mossa.contentEquals(&quot;presa_semplice&quot;)) {</span>
+
+<span class="nc bnc" id="L594" title="All 4 branches missed.">					if(((cella_destinazione + 1) == ((cella_partenza + 1) - 9)) || ((cella_destinazione + 1) == ((cella_partenza + 1) - 7)) ) { </span>
+<span class="nc" id="L595">				         valida = true;</span>
+
+				         }
+		    	}
+				
+		}
+				
+<span class="nc bnc" id="L602" title="All 2 branches missed.">				if(!(this.controlloRiga())) {</span>
+
+<span class="nc bnc" id="L604" title="All 2 branches missed.">if(this.tipologia_mossa.contentEquals(&quot;spostamento&quot;)) {</span>
+<span class="nc bnc" id="L605" title="All 4 branches missed.">					if(((cella_destinazione + 1) == ((cella_partenza + 1) - 4)) || ((cella_destinazione + 1) == ((cella_partenza + 1) - 5)) ) {</span>
+<span class="nc" id="L606">				         valida = true;</span>
+
+				         }
+				}
+<span class="nc bnc" id="L610" title="All 2 branches missed.">if(this.tipologia_mossa.contentEquals(&quot;presa_semplice&quot;)) {</span>
+
+<span class="nc bnc" id="L612" title="All 4 branches missed.">					if(((cella_destinazione + 1) == ((cella_partenza + 1) - 9)) || ((cella_destinazione + 1) == ((cella_partenza + 1) - 7)) ) { </span>
+<span class="nc" id="L613">				         valida = true;</span>
+
+				         }
+			}
+			
+					}
+			}
+				
+			}
+		}
+				
+	
+<span class="nc bnc" id="L625" title="All 2 branches missed.">	if(colore.contentEquals(&quot;nero&quot;)) {</span>
+
+<span class="nc bnc" id="L627" title="All 6 branches missed.">		if((((cella_partenza + 1) &gt;= 0) &amp;&amp; cella_partenza &lt; cella_destinazione) &amp;&amp; (cella_destinazione + 1) &lt;= 32) {</span>
+
+<span class="nc bnc" id="L629" title="All 4 branches missed.">			if(((cella_partenza + 1)%8 == 0) || (cella_partenza + 1)%8 == 1) {</span>
+				
+<span class="nc bnc" id="L631" title="All 2 branches missed.">				if(this.tipologia_mossa.contentEquals(&quot;spostamento&quot;)) {</span>
+
+<span class="nc bnc" id="L633" title="All 2 branches missed.">				   if((cella_destinazione + 1) == ((cella_partenza + 1)  + 4)) {</span>
+					
+<span class="nc" id="L635">					valida = true;</span>
+
+				}
+			}
+				
+<span class="nc bnc" id="L640" title="All 2 branches missed.">				else if (this.tipologia_mossa.contentEquals(&quot;presa_semplice&quot;)){</span>
+<span class="nc bnc" id="L641" title="All 4 branches missed.">				     if (((cella_partenza + 1)%8 == 0) &amp;&amp; ((cella_destinazione + 1) == ((cella_partenza + 1) + 7))) { // caso di presa semplice </span>
+											
+<span class="nc" id="L643">						valida = true;</span>
+			
+					
+				}
+<span class="nc bnc" id="L647" title="All 4 branches missed.">				if (((cella_partenza + 1)%8 == 1) &amp;&amp; ((cella_destinazione + 1) == ((cella_partenza + 1) + 9))) { // caso di presa semplice </span>
+					
+<span class="nc" id="L649">					valida = true;</span>
+		
+				
+			}
+			}
+				
+		}
+			else { 
+<span class="nc bnc" id="L657" title="All 2 branches missed.">				if (this.controlloRiga()) {</span>
+
+<span class="nc bnc" id="L659" title="All 2 branches missed.">					if(this.tipologia_mossa.contentEquals(&quot;spostamento&quot;)) {</span>
+					
+<span class="nc bnc" id="L661" title="All 4 branches missed.">					   if(((cella_destinazione + 1) == ((cella_partenza + 1) + 4)) || ((cella_destinazione + 1) == ((cella_partenza + 1) + 5)) ) {</span>
+<span class="nc" id="L662">				         valida = true;</span>
+
+				         }
+				}
+					
+<span class="nc bnc" id="L667" title="All 2 branches missed.">					if(this.tipologia_mossa.contentEquals(&quot;presa_semplice&quot;)) {</span>
+
+<span class="nc bnc" id="L669" title="All 4 branches missed.">					if(((cella_destinazione + 1) == ((cella_partenza + 1) + 9)) || ((cella_destinazione + 1) == ((cella_partenza + 1) + 7)) ) { //issue#25</span>
+<span class="nc" id="L670">				         valida = true;</span>
+
+				         }
+				}
+				}
+				
+<span class="nc bnc" id="L676" title="All 2 branches missed.">				if(!(this.controlloRiga())) {</span>
+					
+<span class="nc bnc" id="L678" title="All 2 branches missed.">					if(this.tipologia_mossa.contentEquals(&quot;spostamento&quot;)) {</span>
+
+<span class="nc bnc" id="L680" title="All 4 branches missed.">					   if(((cella_destinazione + 1) == ((cella_partenza + 1) + 4)) || ((cella_destinazione + 1) == ((cella_partenza + 1) + 3)) ) {</span>
+<span class="nc" id="L681">				         valida = true;</span>
+
+				         }
+				}
+					
+<span class="nc bnc" id="L686" title="All 2 branches missed.">					if(this.tipologia_mossa.contentEquals(&quot;presa_semplice&quot;)) {</span>
+
+<span class="nc bnc" id="L688" title="All 4 branches missed.">					   if(((cella_destinazione + 1) == ((cella_partenza + 1) + 9)) || ((cella_destinazione + 1) == ((cella_partenza + 1) + 7)) ) { </span>
+<span class="nc" id="L689">				         valida = true;</span>
+
+				         }
+				}
+					}
+			}
+		}
+			
+	
+	}
+<span class="nc" id="L699">	return valida;</span>
+	}
+
+	/** Effettua le operazioni di presa_semplice e restituisce true se viene eseguito tutto correttamente*/
+    private boolean presa_semplice(Dama dama_nera[], Dama dama_bianca[], String colore) { 
+    	
+<span class="nc" id="L705">		boolean trovato = false;</span>
+<span class="nc" id="L706">		boolean eseguito = false;</span>
+                              
+<span class="nc bnc" id="L708" title="All 2 branches missed.">		if (colore.contentEquals(&quot;bianco&quot;)) {               //inizio riconoscimento del colore</span>
+
+<span class="nc bnc" id="L710" title="All 2 branches missed.">			for (int k = 0; k &lt; 12; k++) {                               //controlla se tra le dame c'é una che si trova in quel riquadro(casella)</span>
+
+<span class="nc bnc" id="L712" title="All 4 branches missed.">         		if (dama_bianca[k].rileva_cella() == cella_partenza &amp;&amp; !(this.controllaDestinazione(dama_bianca,dama_nera))) { //controllo corrispondenza cella</span>
+
+<span class="nc bnc" id="L714" title="All 2 branches missed.">         			if (this.effettuaPresa(dama_bianca, dama_nera, colore)) { //controlla se c'é una pedina da mangiare</span>
+
+<span class="nc" id="L716">             			dama_bianca[k].spostaPedina(cella_destinazione);</span>
+         			
+<span class="nc" id="L718">             			eseguito = true;</span>
+
+                 	
+<span class="nc" id="L721">                 	trovato = true;</span>
+<span class="nc" id="L722">                 	k=12;</span>
+         		}
+         		
+<span class="nc bnc" id="L725" title="All 4 branches missed.">         		 if (k == 11 &amp;&amp; trovato == false) {</span>
+<span class="nc" id="L726">                 	System.out.println(&quot;Non e' una tua pedina&quot;); //fine iterazione senza trovare alcuna pedina</span>
+                 }
+         		
+             }
+		}
+		}
+<span class="nc bnc" id="L732" title="All 2 branches missed.">		else if (colore.contentEquals(&quot;nero&quot;)) {</span>
+
+<span class="nc bnc" id="L734" title="All 2 branches missed.">           for (int k = 0; k &lt; 12; k++) { //controlla se tra le dame c'é una che si trova in quel riquadro(casella)</span>
+<span class="nc bnc" id="L735" title="All 4 branches missed.">         		if (dama_nera[k].rileva_cella() == cella_partenza &amp;&amp; !(this.controllaDestinazione(dama_bianca,dama_nera))) { //controllo corrispondenza cella</span>
+
+<span class="nc bnc" id="L737" title="All 2 branches missed.">         			if (this.effettuaPresa(dama_bianca, dama_nera, colore)) {</span>
+
+<span class="nc" id="L739">             			dama_nera[k].spostaPedina(cella_destinazione);</span>
+<span class="nc" id="L740">             			eseguito = true;</span>
+
+                 	
+                 	         			
+         			
+<span class="nc" id="L745">                 	trovato = true;</span>
+<span class="nc" id="L746">                 	k=12;</span>
+         		}
+                 
+<span class="nc bnc" id="L749" title="All 4 branches missed.">         		if (k == 11 &amp;&amp; trovato == false) {</span>
+<span class="nc" id="L750">                 	System.out.println(&quot;Non e' una tua pedina&quot;); //fine iterazione senza trovare alcuna pedina</span>
+                 }
+             }
+		    	}
+		}
+		else {
+<span class="nc" id="L756">			System.out.println(&quot;Ho un problema con il riconoscimento del colore&quot;);</span>
+		        }
+		
+<span class="nc" id="L759">     		return eseguito;</span>
+     		 }
+    
+	
+    /** Sposta la pedina indicata nella cella stabilita e restituisce true se tutto é stato eseguito correttamente */	
+	private boolean spostaPedina(Dama dama_nera[], Dama dama_bianca[], String colore){
+<span class="nc" id="L765">		boolean trovato = false;</span>
+<span class="nc" id="L766">		boolean eseguito = false;</span>
+<span class="nc" id="L767">		System.out.println(colore);</span>
+                                                
+<span class="nc bnc" id="L769" title="All 2 branches missed.">		if (colore.contentEquals(&quot;bianco&quot;)) {               //inizio riconoscimento del colore</span>
+
+<span class="nc bnc" id="L771" title="All 2 branches missed."> 			if (!(this.controllaDestinazione(dama_bianca, dama_nera))) { //controlla se la casella di destinazione é libera</span>
+
+<span class="nc bnc" id="L773" title="All 2 branches missed.">			for (int k = 0; k &lt; 12; k++) {                               //controlla se tra le dame c'é una che si trova in quel riquadro(casella)</span>
+<span class="nc bnc" id="L774" title="All 4 branches missed.">         		if (dama_bianca[k].rileva_cella() == cella_partenza &amp;&amp; !(this.controllaDestinazione(dama_bianca,dama_nera))) { //controllo corrispondenza cella</span>
+
+
+<span class="nc" id="L777">             			dama_bianca[k].spostaPedina(cella_destinazione);</span>
+         			
+<span class="nc" id="L779">             			eseguito = true;</span>
+
+                 	
+<span class="nc" id="L782">                 	trovato = true;</span>
+<span class="nc" id="L783">                 	k=12;</span>
+         		}
+         		
+<span class="nc bnc" id="L786" title="All 4 branches missed.">         		 if (k == 11 &amp;&amp; trovato == false) {</span>
+<span class="nc" id="L787">                 	System.out.println(&quot;Non e' una tua pedina&quot;); //fine iterazione senza trovare alcuna pedina</span>
+                 }
+         		
+             }
+		}
+		}
+<span class="nc bnc" id="L793" title="All 2 branches missed.">		else if (colore.contentEquals(&quot;nero&quot;)) {</span>
+
+<span class="nc bnc" id="L795" title="All 2 branches missed."> 			if (!(this.controllaDestinazione(dama_bianca, dama_nera))) {</span>
+
+<span class="nc bnc" id="L797" title="All 2 branches missed.">           for (int k = 0; k &lt; 12; k++) { //controlla se tra le dame c'é una che si trova in quel riquadro(casella)</span>
+<span class="nc bnc" id="L798" title="All 4 branches missed.">         		if (dama_nera[k].rileva_cella() == cella_partenza &amp;&amp; !(this.controllaDestinazione(dama_bianca,dama_nera))) { //controllo corrispondenza cella</span>
+
+
+<span class="nc" id="L801">             			dama_nera[k].spostaPedina(cella_destinazione);</span>
+<span class="nc" id="L802">             			eseguito = true;</span>
+
+                 	
+                 	         			
+         			
+<span class="nc" id="L807">                 	trovato = true;</span>
+<span class="nc" id="L808">                 	k=12;</span>
+         		}
+                 
+<span class="nc bnc" id="L811" title="All 4 branches missed.">         		if (k == 11 &amp;&amp; trovato == false) {</span>
+<span class="nc" id="L812">                 	System.out.println(&quot;Non e' una tua pedina&quot;); //fine iterazione senza trovare alcuna pedina</span>
+                 }
+             }
+		    	}
+		}
+		else {
+<span class="nc" id="L818">			System.out.println(&quot;Ho un problema con il riconoscimento del colore&quot;);</span>
+		        }
+		
+		                                                           	  //fine del riconoscimento del colore
+<span class="nc" id="L822">     		return eseguito;</span>
+     		}
+	
+    /** Controlla se é possibile eseguire le operazioni di presa semplice richiesta dal giocatore e restituisce true in caso positivo*/
+     private boolean controlloPresa(Dama dama_bianca[], Dama dama_nera[],String colore) { 
+<span class="nc" id="L827">	boolean presente = false;</span>
+	
+	
+<span class="nc bnc" id="L830" title="All 2 branches missed.">	if (colore.contentEquals(&quot;nero&quot;)) {</span>
+
+<span class="nc bnc" id="L832" title="All 2 branches missed.">		if (this.controlloRiga()) {</span>
+<span class="nc bnc" id="L833" title="All 2 branches missed.">	for(int i = 0 ; i &lt; 12 ; i++) {</span>
+
+<span class="nc bnc" id="L835" title="All 4 branches missed.">		if((dama_bianca[i].rileva_cella() == (this.cella_partenza + 4)) || dama_bianca[i].rileva_cella() == (this.cella_partenza + 5))  {</span>
+			
+<span class="nc bnc" id="L837" title="All 2 branches missed.">			if (dama_bianca[i].tipoPedina().contentEquals(&quot;dama&quot;)){</span>
+				
+<span class="nc bnc" id="L839" title="All 2 branches missed.">				if(dama_nera[indice_dama].tipoPedina().contentEquals(&quot;dama&quot;)) {</span>
+<span class="nc" id="L840">					presente = true;</span>
+<span class="nc" id="L841">					 i = 12;</span>
+				}
+			}
+			 else {
+			
+<span class="nc" id="L846">			presente = true;</span>
+<span class="nc" id="L847">			 i = 12;</span>
+			}
+		}
+	}
+	}
+		
+<span class="nc bnc" id="L853" title="All 2 branches missed.">    if (!(this.controlloRiga())) {</span>
+<span class="nc bnc" id="L854" title="All 2 branches missed.">	for(int i = 0 ; i &lt; 12 ; i++) {</span>
+<span class="nc bnc" id="L855" title="All 4 branches missed.">		if((dama_bianca[i].rileva_cella() == (this.cella_partenza + 4)) || dama_bianca[i].rileva_cella() ==(this.cella_partenza + 3))  {</span>
+			
+<span class="nc bnc" id="L857" title="All 2 branches missed.">if (dama_bianca[i].tipoPedina().contentEquals(&quot;dama&quot;)){</span>
+				
+<span class="nc bnc" id="L859" title="All 2 branches missed.">				if(dama_nera[indice_dama].tipoPedina().contentEquals(&quot;dama&quot;)) {</span>
+<span class="nc" id="L860">					presente = true;</span>
+<span class="nc" id="L861">					 i = 12;</span>
+				}
+			}
+			 else {
+			
+<span class="nc" id="L866">			presente = true;</span>
+<span class="nc" id="L867">			i = 12;</span>
+		 }
+		}
+	}
+	}
+		
+	}
+<span class="nc bnc" id="L874" title="All 2 branches missed.">	if (colore.contentEquals(&quot;bianco&quot;)) {</span>
+
+<span class="nc bnc" id="L876" title="All 2 branches missed.">		if (this.controlloRiga()) {</span>
+<span class="nc bnc" id="L877" title="All 2 branches missed.">	for(int i = 0 ; i &lt; 12 ; i++) {</span>
+
+<span class="nc bnc" id="L879" title="All 4 branches missed.">		if((dama_nera[i].rileva_cella() == (this.cella_partenza - 4)) || dama_nera[i].rileva_cella() ==(this.cella_partenza - 3))  {</span>
+			
+<span class="nc bnc" id="L881" title="All 2 branches missed.">if (dama_nera[i].tipoPedina().contentEquals(&quot;dama&quot;)){</span>
+				
+<span class="nc bnc" id="L883" title="All 2 branches missed.">				if(dama_bianca[indice_dama].tipoPedina().contentEquals(&quot;dama&quot;)) {</span>
+<span class="nc" id="L884">					presente = true;</span>
+<span class="nc" id="L885">					 i = 12;</span>
+				}
+			}
+			 else {
+			
+<span class="nc" id="L890">			presente = true;</span>
+<span class="nc" id="L891">			i = 12;</span>
+		 }
+		}
+	}
+	}
+				
+<span class="nc bnc" id="L897" title="All 2 branches missed.">	if (!(this.controlloRiga())) {</span>
+<span class="nc bnc" id="L898" title="All 2 branches missed.">	for(int i = 0 ; i &lt; 12 ; i++) {</span>
+
+<span class="nc bnc" id="L900" title="All 4 branches missed.">		if((dama_nera[i].rileva_cella() == (this.cella_partenza - 4)) || dama_nera[i].rileva_cella() ==(this.cella_partenza - 5))  {</span>
+			
+<span class="nc bnc" id="L902" title="All 2 branches missed.">if (dama_nera[i].tipoPedina().contentEquals(&quot;dama&quot;)){</span>
+				
+<span class="nc bnc" id="L904" title="All 2 branches missed.">				if(dama_bianca[indice_dama].tipoPedina().contentEquals(&quot;dama&quot;)) {</span>
+<span class="nc" id="L905">					presente = true;</span>
+<span class="nc" id="L906">					 i = 12;</span>
+				}
+			}
+			 else {
+			
+<span class="nc" id="L911">			presente = true;</span>
+<span class="nc" id="L912">			i = 12;</span>
+         }
+		}
+	}
+	}
+
+	}
+	
+<span class="nc" id="L920">return presente;</span>
+	
+}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
